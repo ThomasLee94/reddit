@@ -7,11 +7,13 @@ html(lang="en")
         title Reddit
     body
         block content 
+        //- NAV
         nav.navbar.navbar-expand-leg.navbar-light.bg-light
+            //- LOGO
             a.navbar-brand(href='#') Navbar
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
-            
+            //- BAR
             div.collapse.navbar-collapse#navbarSupportedContent
             ul.navbar-nav.mr-auto
                 li.nav-item.active
@@ -19,7 +21,7 @@ html(lang="en")
                         span.sr-only (current)
                 li.nav-item
                     a.nav-link(jref='#') Link
-                //- Dropdown menu
+                //- DROPDOWN MENUE
                 li.nav-item.dropdown
                     a.nav-link.dropdown-toggle#navbarDropdown(href='#', role='buton', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Dropdown
                     div.dropdown-menu(aria-labelledby='navbarDropdown')

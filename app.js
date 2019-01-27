@@ -8,6 +8,7 @@
 require("dotenv").config()
 const express = require("express");
 const pug = require('pug');
+const path = require('path')
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
@@ -47,8 +48,8 @@ db.on("connected", () => {
     console.log("Success: connected to MongoDB");
 })
 
-/*  Use handlebars for client-side rendering  */
-app.engine("pug", pug({defaultLayout: "main"}));
+/*  Use PUG for client-side rendering  */
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 /* Authentication */
