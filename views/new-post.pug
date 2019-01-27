@@ -1,20 +1,22 @@
 //- NEW POST
+extends main
 
-div.row
-  div.col-sm-4.col-sm-offset-4
-    form(action='/posts/new' method='post')
-      legend New Post
-      div.form-group
-        label(for='post-title') Title
-        input#post-title(type='text' name='title' class='form-control' placeholder='Title')
-    
-      div.form-group
-        label(for='post-url') Url
-        input#post-url(type='url' name='url' class='form-control' placeholder='https://www.google.com')
-    
-      div.form-group
-        label(for='post-summary') Summary
-        textarea#post-summary(name='summary' class='form-control' placeholder='Title')
+block content 
+  div.row
+    div.col-sm-4.col-sm-offset-4
+      form(action='/posts/new' method='post')
+        legend New Post
+        div.form-group
+          label(for='post-title') Title
+          input#post-title(type='text' name='title' class='form-control' placeholder='Title')
+      
+        div.form-group
+          label(for='post-url') Url
+          input#post-url(type='url' name='url' class='form-control' placeholder='https://www.google.com')
+      
+        div.form-group
+          label(for='post-summary') Summary
+          textarea#post-summary(name='summary' class='form-control' placeholder='Title')
 
-      div.text-right
-        button(type='submit' class='btn btn-primary') Create Post
+        div.text-right
+          button(type='submit' class='btn btn-primary') Create Post
