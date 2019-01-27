@@ -5,7 +5,7 @@ assert = require('assert');
 /* Checking or mongoose connection */
 const db = mongoose.connection;
 db.on('connected', () => {
-    console.log('Success: connected to MongoDB');
+  console.log('Success: connected to MongoDB');
 })
 
 const url = process.env.MONGODB_URI;
