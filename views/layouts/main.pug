@@ -4,20 +4,22 @@ html(lang="en")
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous")
         title Reddit
+
     body
         block content 
         //- NAV
         nav.navbar.navbar-expand-leg.navbar-light.bg-light
             //- LOGO
-            a.navbar-brand(href='#') Navbar
+            a.navbar-brand(href='/') Reddit
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
             //- BAR
             div.collapse.navbar-collapse#navbarSupportedContent
             ul.navbar-nav.mr-auto
                 li.nav-item.active
-                    a.nav-link(href='#') Home 
+                    a.nav-link(href='/posts/new') New Post 
                         span.sr-only (current)
                 li.nav-item
                     a.nav-link(jref='#') Link
@@ -34,9 +36,7 @@ html(lang="en")
                 form.form-inline.my-2.my-lg-0
                     input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
                     button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
-                        
-
-        
+        //- SCRIPTS
         script(src='https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=')
         script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49' crossorigin='anonymous')
         script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy' crossorigin='anonymous')
