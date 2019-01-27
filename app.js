@@ -24,20 +24,20 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 
 // let checkAuth = (req, res, next) => {
-//     console.log("Checking authentication");
-//     if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
-//       req.user = null;
-//       console.log('HIT NO USER')
-//     } else {
-//         console.log(req.cookies)
-//       let token = req.cookies.nToken;
-//       let decodedToken = jwt.decode(token, { complete: true }) || {};
-//       req.user = decodedToken.payload;
-//       console.log(req.user)
-//     }
-  
-//    next()
-  }
+//   console.log("Checking authentication");
+//   if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
+//     req.user = null;
+//     console.log('HIT NO USER')
+//   } else {
+//     console.log(req.cookies)
+//     let token = req.cookies.nToken;
+//     let decodedToken = jwt.decode(token, { complete: true }) || {};
+//     req.user = decodedToken.payload;
+//     console.log(req.user)
+//   }
+
+//   next()
+// }
 
 /*  Connecting to mongoose */ 
 mongoose.connect(process.env.MONGODB_URI);
@@ -48,8 +48,8 @@ db.on("connected", () => {
 })
 
 /*  Use handlebars for client-side rendering  */
-app.engine("handlebars", handlebars({defaultLayout: "main"}));
-app.set("view engine", "handlebars");
+app.engine("pug", pug({defaultLayout: "main"}));
+app.set("view engine", "pug");
 
 /* Authentication */
 // app.use(checkAuth);
