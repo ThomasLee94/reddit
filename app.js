@@ -7,6 +7,7 @@
 // dotenv will be needed for secrets
 require("dotenv").config()
 const express = require("express");
+const pug = require('pug');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
@@ -22,21 +23,20 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 
-let checkAuth = (req, res, next) => {
-    console.log("Checking authentication");
-
-    if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
-      req.user = null;
-      console.log('HIT NO USER')
-    } else {
-        console.log(req.cookies)
-      let token = req.cookies.nToken;
-      let decodedToken = jwt.decode(token, { complete: true }) || {};
-      req.user = decodedToken.payload;
-      console.log(req.user)
-    }
+// let checkAuth = (req, res, next) => {
+//     console.log("Checking authentication");
+//     if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
+//       req.user = null;
+//       console.log('HIT NO USER')
+//     } else {
+//         console.log(req.cookies)
+//       let token = req.cookies.nToken;
+//       let decodedToken = jwt.decode(token, { complete: true }) || {};
+//       req.user = decodedToken.payload;
+//       console.log(req.user)
+//     }
   
-   next()
+//    next()
   }
 
 /*  Connecting to mongoose */ 
@@ -52,11 +52,9 @@ app.engine("handlebars", handlebars({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 /* Authentication */
-app.use(checkAuth);
+// app.use(checkAuth);
 
 /*  Importing controllers */
-require('./controllers/users')(app);
-require('./controllers/auth')(app);
 
 /*  Port */ 
 const port = process.env.PORT || 3000;
