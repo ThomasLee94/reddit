@@ -3,11 +3,13 @@ extends main
 block content
   html(lang="en")
     head
-      title Document
+      title Show All Posts
     body
       div.row
-        div.col-sm-8.col-sm-offset-2
-          each post in posts
-            li.list-group-item 
-              div.lead #{post.title}
-              a(href='#{post.url}', target='_blank') #{post.url}
+        a(href='#')
+          div.col-sm-8.col-sm-offset-2
+            each post in posts
+              li.list-group-item(href="http://google.com")
+                div.lead
+                  a(href='/post/' + post._id, target='_blank') #{post.title}
+                  p #{post.summary}
