@@ -13,7 +13,6 @@ chai.use(chaiHttp);
 
 describe('Posts', function() {
   const agent = chai.request.agent(server);
-  // Post that we'll use for testing purposes
   const newPost = {
       title: 'post title',
       url: 'https://www.google.com',
@@ -21,8 +20,15 @@ describe('Posts', function() {
   };
   it("should create with valid attributes at POST /posts/new", function (done) {
     chai
+    // Testing if post was created
       .request(app)
-      .get('/posts/new')
       .post('/posts/new')
+      .end(function(err, res) {
+        if (err) {
+          return done(err);
+        }
+        expect(res.status).to.equal(200);
+        return done();
+      })
   });
 });

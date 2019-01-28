@@ -19,10 +19,15 @@ module.exports = (app) => {
 
   // CREATE NEW POST
   app.post('/posts/new', (req,res) => {
-    // INSTANTIATE INSTANCE OF POST MODEL
-    const post = new Post(req.body);
-    // SAVE INSTANCE OF POST MODEL TO DB
-    post.save((err, post) => res.redirect('/'));
+    // Checking if user has filled all fields before posting
+    if (req.body.title && req.body.url && req.body.summary) {
+      // INSTANTIATE INSTANCE OF POST MODEL
+      const post = new Post(req.body);
+      // SAVE INSTANCE OF POST MODEL TO DB
+      post.save((err, post) => res.redirect('/'));
+    } else {
+      res.alert("You must fill all 3 fields before posting!")
+    }
   });
 
   // SEE INDIVIDUAL POST 
