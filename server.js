@@ -62,3 +62,5 @@ require('./data/reddit-db');
 /*  Port */ 
 const port = process.env.PORT || 3000;
 app.listen(port); 
+
+module.exports = app;

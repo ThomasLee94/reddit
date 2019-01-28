@@ -27,8 +27,6 @@ module.exports = (app) => {
 
   // SEE INDIVIDUAL POST 
   app.get('/post/:id', (req, res) => {
-    console.log("************************")
-    console.log(req.params.id)
     // LOOK UP POST
     Post.findById(req.params.id)
       .then((post) => {
