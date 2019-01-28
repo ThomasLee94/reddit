@@ -12,14 +12,10 @@ const url = process.env.MONGODB_URI;
 mongoose.Promise = global.Promise;
 mongoose.connect(
   url,
-  { useNewUrlParser: true },
-  function(err, db) {
-    assert.equal(null, err);
-    console.log('Connected successfully to database');
-
-    // db.close(); turn on for testing
-  }
+  { useNewUrlParser: true }
 );
+
+mongoose.set('set', true);
 
 db.on('error', console.error.bind(console, 'MongoDB connection Error:'));
 mongoose.set('debug', true);
