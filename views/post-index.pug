@@ -5,4 +5,9 @@ block content
     head
       title Document
     body
-      h1 #{posts[0].summary}
+      div.row
+        div.col-sm-8.col-sm-offset-2
+          each post in posts
+            li.list-group-item 
+              div.lead #{post.title}
+              a(href='#{post.url}', target='_blank') #{post.url}
