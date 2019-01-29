@@ -26,7 +26,7 @@ module.exports = (app) => {
       // SAVE INSTANCE OF POST MODEL TO DB
       post.save((err, post) => res.redirect('/'));
     } else {
-      res.alert("You must fill all 3 fields before posting!")
+      res.render('create-post-error')
     }
   });
 
