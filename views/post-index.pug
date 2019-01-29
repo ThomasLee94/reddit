@@ -13,3 +13,4 @@ block content
                 div.lead
                   a(href='/post/' + post._id, target='_blank') #{post.title}
                   p #{post.summary}
+                  a(href='/r/' + post.subreddit, target='_blank') /r/#{post.subreddit}

@@ -41,4 +41,15 @@ module.exports = (app) => {
         console.log(err.message);
       });
   });
+
+  // SUBREDDIT
+  app.get('/r/:subreddit', (req, res) => {
+    Post.find({subreddit: req.params.subreddit})
+      .then((posts) => {
+        res.render('post-index', { posts });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  })
 };
