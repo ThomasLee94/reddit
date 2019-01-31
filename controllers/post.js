@@ -33,7 +33,11 @@ module.exports = (app) => {
   // SEE INDIVIDUAL POST 
   app.get('/post/:id', (req, res) => {
     // LOOK UP POST
-    Post.findById(req.params.id)
+    Post.findById(req.params.id).populate('comments').then((post) => {
+      res.render('posts-show', {post})
+    }).catch((err) => {
+      console.log(err.message)
+    })
       .then((post) => {
         res.render('posts-show', {post});
       })

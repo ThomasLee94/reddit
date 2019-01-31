@@ -5,7 +5,7 @@
 
 require('dotenv').config()
 const express = require('express');
-const pug = require('pug');
+const handlebars = require('express-handlebars');
 const path = require('path')
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -47,14 +47,15 @@ app.use(expressValidator());
 mongoose.connect(process.env.MONGODB_URI);
 
 /*  Use PUG for client-side rendering  */
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 /* Authentication */
 // app.use(checkAuth);
 
 /*  Importing controllers */
 require('./controllers/post')(app);
+require('./controllers/comment')(app);
 
 // Setting db
 require('./data/reddit-db');
