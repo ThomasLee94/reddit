@@ -5,8 +5,8 @@ module.exports = (app) => {
   // SHOW POSTS
   app.get('/', (req, res) => {
     Post.find({})
-      .then((posts) => {res.render('post-index', { posts });})
-      .catch((err) => {console.log(err.message);});
+      .then((posts) => {res.render('post-index', { posts }); })
+      .catch((err) => {console.log(err.message); });
   });
 
   // RENDER NEW-POST PAGE
