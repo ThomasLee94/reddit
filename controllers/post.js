@@ -1,21 +1,18 @@
+/* eslint-disable no-console */
 const Post = require('../models/post');
 
 module.exports = (app) => {
   // SHOW POSTS
   app.get('/', (req, res) => {
     Post.find({})
-      .then((posts) => {
-        res.render('post-index', { posts });
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .then((posts) => {res.render('post-index', { posts });})
+      .catch((err) => {console.log(err.message);});
   });
 
   // RENDER NEW-POST PAGE
   app.get('/posts/new', (req, res) => {
-    res.render('new-post')
-  })
+    res.render('new-post');
+  }); 
 
   // CREATE NEW POST
   app.post('/posts/new', (req,res) => {
@@ -26,7 +23,7 @@ module.exports = (app) => {
       // SAVE INSTANCE OF POST MODEL TO DB
       post.save((err, post) => res.redirect('/'));
     } else {
-      res.render('create-post-error')
+      res.render('create-post-error');
     }
   });
 
@@ -34,26 +31,17 @@ module.exports = (app) => {
   app.get('/post/:id', (req, res) => {
     // LOOK UP POST
     Post.findById(req.params.id).populate('comments').then((post) => {
-      res.render('posts-show', {post})
-    }).catch((err) => {
-      console.log(err.message)
+      res.render('posts-show', { post });
     })
-      .then((post) => {
-        res.render('posts-show', {post});
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => { console.log(err.message); })
+      .then((post) => { res.render('posts-show', { post }); })
+      .catch((err) => { console.log(err.message); });
   });
 
   // SUBREDDIT
   app.get('/r/:subreddit', (req, res) => {
     Post.find({subreddit: req.params.subreddit})
-      .then((posts) => {
-        res.render('post-index', { posts });
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  })
+      .then((posts) => { res.render('post-index', { posts }); })
+      .catch((err) => { console.log(err); });
+  });
 };

@@ -5,8 +5,7 @@
         <ul>
             {{#each posts}}
                 <li class="list-group-item">
-                    <div class="lead">{{this.title}}</div>
-                    <a href="{{this.url}}" target="_blank">{{this.url}}</a>
+                    <a href='/post/{{this._id}}'class="lead">{{this.title}}</a>
                     <div class="text-right">
                         <a href="/r/{{this.subreddit}}">{{this.subreddit}}</a>
                     </div>
