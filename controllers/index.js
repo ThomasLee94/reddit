@@ -9,8 +9,5 @@ router.get('/', (req, res) => {
     .then((posts) => {res.render('post-index', { posts, currentUser }); })
     .catch((err) => {console.log(err.message); });
 });
-  .catch((err) => {
-    console.log(err.message);
-  })
 
-  module.exports = router; 
+module.exports = router; 

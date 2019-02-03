@@ -1,8 +1,4 @@
-/* ****************
- * Project: REDDIT*
- * ****************
- * */
-
+// MIDDLEWARE IMPORTS
 require('dotenv').config();
 const express = require('express');
 const handlebars = require('express-handlebars');
@@ -14,18 +10,25 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt'); 
 
-/*  Run app.js as an instasnce of express */
+/*  CONTROLLER IMPORTS */
+let indexRouter = require('./controllers/index');
+let postRouter = require('./controllers/post');
+let commentRouter = require('./controllers/comment');
+let subredditsRouter = require('./controllers/subreddit');
+let authRouter = require('./controllers/auth');
+
+// SETTING DB AND MONGOOSE CONNECTION
+require('./data/reddit-db');
+mongoose.connect(process.env.MONGODB_URI);
+
+/*  INSTANCE OF EXPRESS */
 const app = express();
 
-/*  Initialise cookieParser  */
+/*  INITIALISE MIDDLEWARE  */
 app.use(cookieParser());
 app.use(express.static('public'));
-
-/*  Use body-parser */ 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
-
-// Use express-validator
 app.use(expressValidator());
 
 // let checkAuth = (req, res, next) => {
@@ -44,32 +47,21 @@ app.use(expressValidator());
 //   next()
 // }
 
-/*  Connecting to mongoose */ 
-mongoose.connect(process.env.MONGODB_URI);
-
-/*  Use PUG for client-side rendering  */
+/*  HANDLEBARS (CLIENT SIDE RENDERING)  */
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 /* Authentication */
 // app.use(checkAuth);
 
-/*  IMPORTING CONTROLLERS */
-let postRouter = require('./controllers/post');
-let commentRouter = require('./controllers/comment');
-let authRouter = require('./controllers/auth');
-
 app.use('/', indexRouter);
 app.use('/post', postRouter);
 app.use('/r', subredditsRouter);
 app.use('/comments', commentRouter);
-app.use('/users', usersRouter);
+app.use('/users', authRouter); 
 
-// Setting db
-require('./data/reddit-db');
-
-/*  Port */ 
-const port = process.env.PORT || 3000;
+/*  PORT */ 
+const port = process.env.PORT;
 app.listen(port); 
 
 module.exports = app;
