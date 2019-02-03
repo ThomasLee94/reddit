@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const Post = require('../models/post');
 const express = require('express');
+
 const router = express.Router();
 
 // RENDER NEW-POST PAGE
