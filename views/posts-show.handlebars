@@ -14,10 +14,8 @@
       </div>
     </form>
     {{!-- {{/if}} --}}
-
-    {{#each post.comments}}
-      {{this}}
-      {{!-- {{> comment post=../post comment=this}} --}}
+    {{#each post.comment}}
+    <p>{{this.content}}</p>
     {{/each}}
 
   </div>

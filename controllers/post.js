@@ -30,17 +30,16 @@ module.exports = (app) => {
   // SEE INDIVIDUAL POST 
   app.get('/post/:id', (req, res) => {
     // LOOK UP POST
-    Post.findById(req.params.id).populate('comments').then((post) => {
+    Post.findById(req.params.id).populate('comment').then((post) => {
+      console.log(post)
       res.render('posts-show', { post });
     })
-      .catch((err) => { console.log(err.message); })
-      .then((post) => { res.render('posts-show', { post }); })
       .catch((err) => { console.log(err.message); });
   });
 
   // SUBREDDIT
   app.get('/r/:subreddit', (req, res) => {
-    Post.find({subreddit: req.params.subreddit})
+    Post.find({subreddit: req.params.subreddit })
       .then((posts) => { res.render('post-index', { posts }); })
       .catch((err) => { console.log(err); });
   });

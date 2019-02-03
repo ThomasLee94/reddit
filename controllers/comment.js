@@ -10,18 +10,12 @@ module.exports = function(app) {
     // SAVE INSTANCE OF COMMENT MODEL TO DB
     comment 
       .save()
-      .then((comment) => {
-        return Post.findById(req.params.postId)
+      .then((comment) => { return Post.findById(req.params.postId) })
+      .then((post) => { 
+        post.comment.unshift(comment); 
+        return post.save() 
       })
-      .then((post) => {
-        post.comment.unshift(comment);
-        return post.save()
-      })
-      .then((post) => {
-        res.redirect('/')
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((post) => { res.redirect('/') })
+      .catch((err) => { console.log(err); });
   });
 };
