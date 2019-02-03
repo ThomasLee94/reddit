@@ -55,9 +55,15 @@ app.set('view engine', 'handlebars');
 // app.use(checkAuth);
 
 /*  IMPORTING CONTROLLERS */
-require('./controllers/post')(app);
-require('./controllers/comment')(app);
-require('./controllers/auth')(app);
+let postRouter = require('./controllers/post');
+let commentRouter = require('./controllers/comment');
+let authRouter = require('./controllers/auth');
+
+app.use('/', indexRouter);
+app.use('/post', postRouter);
+app.use('/r', subredditsRouter);
+app.use('/comments', commentRouter);
+app.use('/users', usersRouter);
 
 // Setting db
 require('./data/reddit-db');
