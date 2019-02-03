@@ -3,15 +3,16 @@
  * ****************
  * */
 
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
 const handlebars = require('express-handlebars');
-const path = require('path')
+const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt'); 
 
 /*  Run app.js as an instasnce of express */
 const app = express();
@@ -53,9 +54,10 @@ app.set('view engine', 'handlebars');
 /* Authentication */
 // app.use(checkAuth);
 
-/*  Importing controllers */
+/*  IMPORTING CONTROLLERS */
 require('./controllers/post')(app);
 require('./controllers/comment')(app);
+require('./controllers/auth')(app);
 
 // Setting db
 require('./data/reddit-db');
