@@ -1,6 +1,10 @@
+
+const express = require('express');
+const router = express.Router();
 const jwt = require('jsonwebtoken');
+
 // SIGN UP POST
-app.post("/sign-up", (req, res) => {
+router.post("/sign-up", (req, res) => {
   // Create User and JWT
   const user = new User(req.body);
 
@@ -14,4 +18,10 @@ app.post("/sign-up", (req, res) => {
       return res.status(400).send({ err: err });
     });
 
+});
+
+// LOGOUT
+router.get('/logout', (req, res) => {
+  res.clearCookie('nToken');
+  res.redirect('/');
 });
