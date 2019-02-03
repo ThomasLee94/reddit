@@ -10,6 +10,23 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt'); 
 
+// AUTH CUSTOM MIDDLEWARE
+let checkAuth = (req, res, next) => {
+  console.log('Checking authentication');
+  if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
+    req.user = null;
+    console.log('HIT NO USER')
+  } else {
+    console.log(req.cookies)
+    let token = req.cookies.nToken;
+    let decodedToken = jwt.decode(token, { complete: true }) || {};
+    req.user = decodedToken.payload;
+    console.log(req.user); 
+  }
+
+  next();
+}
+
 /*  CONTROLLER IMPORTS */
 let indexRouter = require('./controllers/index');
 let postRouter = require('./controllers/post');
@@ -30,29 +47,12 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
 app.use(expressValidator());
+app.use(checkAuth);
 
-// let checkAuth = (req, res, next) => {
-//   console.log('Checking authentication');
-//   if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
-//     req.user = null;
-//     console.log('HIT NO USER')
-//   } else {
-//     console.log(req.cookies)
-//     let token = req.cookies.nToken;
-//     let decodedToken = jwt.decode(token, { complete: true }) || {};
-//     req.user = decodedToken.payload;
-//     console.log(req.user)
-//   }
-
-//   next()
-// }
 
 /*  HANDLEBARS (CLIENT SIDE RENDERING)  */
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
-
-/* Authentication */
-// app.use(checkAuth);
 
 app.use('/', indexRouter);
 app.use('/post', postRouter);
