@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
