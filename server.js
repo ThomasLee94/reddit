@@ -56,7 +56,7 @@ app.set('view engine', 'handlebars');
 
 // CUSTOM ROUTES
 app.use('/', indexRouter);
-app.use('/post', postRouter);
+app.use('/posts', postRouter);
 app.use('/r', subredditsRouter);
 app.use('/comments', commentRouter);
 app.use('/users', authRouter); 
