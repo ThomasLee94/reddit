@@ -10,7 +10,8 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt'); 
 
-// AUTH CUSTOM MIDDLEWARE
+// CUSTOM AUTH MIDDLEWARE IMPORT
+const checkAuth = require('./lib/checkAuth');
 
 /*  CONTROLLER IMPORTS */
 const indexRouter = require('./controllers/index');
@@ -24,15 +25,17 @@ require('./data/reddit-db');
 
 mongoose.connect(process.env.MONGODB_URI);
 
-/*  INSTANCE OF EXPRESS */
+// INSTANCE OF EXPRESS 
 const app = express();
 
-/*  INITIALISE MIDDLEWARE  */
+//  REQ/RES MIDDLEWARE  
 app.use(cookieParser());
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
 app.use(expressValidator());
+
+// AUTH CUSTOM MIDDLEWARE
 app.use(checkAuth);
 
 /*  HANDLEBARS (CLIENT SIDE RENDERING)  */
@@ -46,7 +49,7 @@ app.use('/r', subredditsRouter);
 app.use('/comments', commentRouter);
 app.use('/users', authRouter); 
 
-/*  PORT */ 
+// PORT 
 const port = process.env.PORT;
 app.listen(port);
 
