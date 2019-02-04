@@ -11,21 +11,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt'); 
 
 // AUTH CUSTOM MIDDLEWARE
-let checkAuth = (req, res, next) => {
-  console.log('Checking authentication');
-  if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
-    req.user = null;
-    console.log('HIT NO USER');
-  } else {
-    console.log(req.cookies);
-    let token = req.cookies.nToken;
-    let decodedToken = jwt.decode(token, { complete: true }) || {};
-    req.user = decodedToken.payload;
-    console.log(req.user); 
-  }
-
-  next();
-};
 
 /*  CONTROLLER IMPORTS */
 const indexRouter = require('./controllers/index');
