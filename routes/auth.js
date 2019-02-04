@@ -66,8 +66,7 @@ router.post('/login', (req, res) => {
         res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
         res.redirect('/');
       });
-    })
-    .catch((err) => { console.log(err); });
+    }).catch((err) => { console.log(err); });
 });
 
 module.exports = router; 

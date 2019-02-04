@@ -13,14 +13,15 @@ router.get('/new', (req, res) => {
 // CREATE NEW POST
 router.post('/new', (req,res) => {
   const currentUser = req.user; 
-  // Checking if user has filled all fields before posting
-  if (req.body.title && req.body.url && req.body.summary) {
+  // IF USER IS LOGGED IN AND FILLED ALL FIELDS
+  if (req.body.title && req.body.url && req.body.summary && req.user) {
     // INSTANTIATE INSTANCE OF POST MODEL
     const post = new Post(req.body);
     // SAVE INSTANCE OF POST MODEL TO DB
     post.save((err, post) => res.redirect('/', { currentUser }));
   } else {
-    res.render('create-post-error', { currentUser });
+    // UNAUTHORISED
+    return res.status(401);
   }
 });
 

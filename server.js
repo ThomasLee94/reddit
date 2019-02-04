@@ -13,16 +13,15 @@ const bcrypt = require('bcrypt');
 // CUSTOM AUTH MIDDLEWARE IMPORT
 const checkAuth = require('./lib/checkAuth');
 
-/*  CONTROLLER IMPORTS */
-const indexRouter = require('./controllers/index');
-const postRouter = require('./controllers/post');
-const commentRouter = require('./controllers/comment');
-const subredditsRouter = require('./controllers/subreddit');
-const authRouter = require('./controllers/auth');
+// ROUTE IMPORTS
+const indexRouter = require('./routes/index');
+const postRouter = require('./routes/post');
+const commentRouter = require('./routes/comment');
+const subredditsRouter = require('./routes/subreddit');
+const authRouter = require('./routes/auth');
 
 // SETTING DB AND MONGOOSE CONNECTION
 require('./data/reddit-db');
-
 mongoose.connect(process.env.MONGODB_URI);
 
 // INSTANCE OF EXPRESS 
@@ -36,10 +35,10 @@ app.use(express.json());
 app.use(expressValidator());
 
 // AUTH CUSTOM MIDDLEWARE
-app.use(checkAuth);
+app.use('/', checkAuth);
 
 /*  HANDLEBARS (CLIENT SIDE RENDERING)  */
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 // CUSTOM ROUTES
