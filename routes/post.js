@@ -14,6 +14,7 @@ router.get('/new', (req, res) => {
 }); 
 
 // CREATE NEW POST
+// ONLY USERS WHO HAVE LOGGED IN MAY POST
 router.post('/new', checkAuth, (req,res) => {
   const currentUser = req.user; 
   // IF USER IS LOGGED IN AND FILLED ALL FIELDS
