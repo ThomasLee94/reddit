@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const Post = require('../models/post');
+const User = require('../models/user');
 const express = require('express');
 
 const router = express.Router();
@@ -21,8 +22,20 @@ router.post('/new', checkAuth, (req,res) => {
   if (req.body.title && req.body.url && req.body.summary && req.user) {
     // INSTANTIATE INSTANCE OF POST MODEL
     const post = new Post(req.body);
+    post.author = req.user._id
     // SAVE INSTANCE OF POST MODEL TO DB
-    post.save((err, post) => res.redirect('/', { currentUser }));
+    post
+      .save()
+      .then((post) => { return User.findById(req.user._id) })
+      .then((user) => {
+        user.posts.unshift(post);
+        user.save();
+        // REDIRECT TO NEW POST
+        res.redirect(`/posts/${post._id}`)
+      })
+      .catch((err) => {
+        console.log(err.message); 
+      })
   } else {
     // UNAUTHORISED
     return res.status(401);

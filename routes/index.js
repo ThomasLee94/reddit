@@ -1,11 +1,12 @@
 const express = require('express');
 
 const router = express.Router();
+const checkUser = require('../lib/checkUser')
 
 const Post = require('../models/post');
 
 // SHOW POSTS
-router.get('/', (req, res) => {
+router.get('/', checkUser, (req, res) => {
   const currentUser = req.user; 
   console.log(currentUser)
   Post.find({})
