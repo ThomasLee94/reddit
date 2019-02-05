@@ -4,6 +4,9 @@ const express = require('express');
 
 const router = express.Router();
 
+// AUTH CUSTOM MIDDLEAWARE
+const checkAuth = require('../lib/checkAuth');
+
 // RENDER NEW-POST PAGE
 router.get('/new', (req, res) => {
   const currentUser = req.user; 
@@ -11,7 +14,7 @@ router.get('/new', (req, res) => {
 }); 
 
 // CREATE NEW POST
-router.post('/new', (req,res) => {
+router.post('/new', checkAuth, (req,res) => {
   const currentUser = req.user; 
   // IF USER IS LOGGED IN AND FILLED ALL FIELDS
   if (req.body.title && req.body.url && req.body.summary && req.user) {
