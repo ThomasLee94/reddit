@@ -8,12 +8,11 @@ const Post = require('../models/post');
 // SHOW POSTS
 router.get('/', checkUser, (req, res) => {
   const currentUser = req.user; 
-  console.log(currentUser)
-  Post.find({})
+  console.log(currentUser);
+  Post.find().populate('author')
     .then((posts) => {
       res.render('post-index', { posts, currentUser }); 
-    })
-    .catch((err) => {console.log(err.message); });
+    }).catch((err) => {console.log(err.message); });
 });
 
 module.exports = router; 

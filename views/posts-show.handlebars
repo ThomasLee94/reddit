@@ -15,7 +15,8 @@
     </form>
     {{!-- {{/if}} --}}
     {{#each post.comment}}
-    <p>{{this.content}}</p>
+      <p>{{this.content}}</p>
+      <p>{{this.author.username}}</p>
     {{/each}}
 
   </div>

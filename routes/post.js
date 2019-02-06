@@ -45,10 +45,11 @@ router.post('/new', checkAuth, (req,res) => {
 // SEE INDIVIDUAL POST 
 router.get('/:id', (req, res) => {
   // LOOK UP POST
-  Post.findById(req.params.id).populate('comment').then((post) => {
-    console.log(post)
-    res.render('posts-show', { post });
-  })
+  Post.findById(req.params.id).populate('comment').populate('author')
+    .then((post) => {
+      console.log(post)
+      res.render('posts-show', { post });
+    })
     .catch((err) => { console.log(err.message); });
 });
 
