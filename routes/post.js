@@ -42,13 +42,15 @@ router.post('/new', checkAuth, (req,res) => {
   }
 });
 
-// SEE INDIVIDUAL POST 
-router.get('/:id', (req, res) => {
+// SEE INDIVIDUAL POST AND NESTED COMMENTS
+router.get('/:id', checkAuth, (req, res) => {
   // LOOK UP POST
+  const currentUser = req.user; 
+  console.log(currentUser)
   Post.findById(req.params.id).populate('comment').populate('author')
     .then((post) => {
       console.log(post)
-      res.render('posts-show', { post });
+      res.render('posts-show', { post, currentUser });
     })
     .catch((err) => { console.log(err.message); });
 });

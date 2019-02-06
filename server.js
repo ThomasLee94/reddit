@@ -23,9 +23,6 @@ require('./data/reddit-db');
 // INSTANCE OF EXPRESS
 const app = express();
 
-// CUSTOM AUTH MIDDLEWARE IMPORT
-const checkAuth = require('./lib/checkAuth');
-
 //  REQ/RES MIDDLEWARE
 app.use(cookieParser());
 app.use(express.static('public'));
