@@ -47,7 +47,7 @@ router.get('/:id', checkAuth, (req, res) => {
   // LOOK UP POST
   const currentUser = req.user; 
   console.log(currentUser)
-  Post.findById(req.params.id).populate('comment').populate('author')
+  Post.findById(req.params.id).populate( {path:'comments', populate: {path: 'author' } }).populate('author')
     .then((post) => {
       console.log(post)
       res.render('posts-show', { post, currentUser });
