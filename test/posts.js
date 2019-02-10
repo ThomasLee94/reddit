@@ -1,15 +1,17 @@
+/* eslint-disable no-undef */
 /* eslint-disable func-names */
 /* eslint-disable prefer-arrow-callback */
 
 // test/posts.js
-const app = require("./../server");
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const expect = chai.expect;
-
-// Import Post model
-const Post = require('../models/post');
 const server = require('../server');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const expect = chai.expect;
+const agent = chai.request.agent(server);
+
+// Import models
+const Post = require('../models/post');
+const User = require('../models/user')
 
 chai.should();
 chai.use(chaiHttp);
@@ -21,16 +23,32 @@ describe ('Posts', function() {
     url: 'https://www.google.com',
     summary: 'post summary',
   };
-  it ('Should create with valid attributes at POST /posts/new', function(done) {
+  const user = {
+    username: 'poststest',
+    password: 'testposts'
+  };
+  before(function (done) {
+    agent
+      .post('/sign-up')
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .send(user)
+      .then(function (res) {
+        done();
+      })
+      .catch(function (err) {
+        done(err);
+      });
+  });
+  it('Should create with valid attributes at POST /posts/new', function(done) {
     // Checks how many posts there are now
     Post.estimatedDocumentCount()
       .then(function (initialDocCount) {
         chai
-          .request(app)
-          .post("/posts/new")
+          .request(server)
+          .post('/posts/new')
           // This line fakes a form post,
           // since we're not actually filling out a form
-          .set("content-type", "application/x-www-form-urlencoded")
+          .set('content-type', 'application/x-www-form-urlencoded')
           // Make a request to create another
           .send(newPost)
           .then(function (res) {
@@ -54,7 +72,24 @@ describe ('Posts', function() {
         done(err);
       });
   });
-  after (function () {
-    Post.findOneAndDelete(newPost);
+  after(function (done) {
+    Post.findOneAndDelete(newPost)
+      .then(function (res) {
+        agent.close();  
+        User.findOneAndDelete({
+          username: user.username
+        })
+          .then(function (res) {
+            done()
+          })
+          .catch(function (err) {
+            done(err);
+          });
+      })
+      .catch(function (err) {
+        done(err);
+      });
   });
 });
+
+

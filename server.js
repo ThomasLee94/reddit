@@ -40,3 +40,5 @@ server.use('/users', authRouter);
 // PORT
 const port = process.env.PORT;
 server.listen(port);
+
+module.exports = server;
