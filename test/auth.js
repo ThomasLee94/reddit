@@ -60,5 +60,3 @@ describe('User', function() {
     agent.close()
   });
 });
-
-
