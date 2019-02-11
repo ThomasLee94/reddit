@@ -5,7 +5,7 @@ const Comment = require('../models/comment');
 const express = require('express');
 const router = express.Router();
 
-const checkAuth = require('../lib/checkAuth')
+const checkAuth = require('../middleware/checkAuth')
 
 // CREATE COMMENT
 router.post('/:postid/comments', checkAuth, (req, res) => {

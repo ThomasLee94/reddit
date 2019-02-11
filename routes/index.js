@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const checkUser = require('../lib/checkUser')
+const checkUser = require('../middleware/checkUser')
 
 const Post = require('../models/post');
 

@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 
 // AUTH CUSTOM MIDDLEAWARE
-const checkAuth = require('../lib/checkAuth');
+const checkAuth = require('../middleware/checkAuth');
 
 // RENDER NEW-POST PAGE
 router.get('/new', (req, res) => {

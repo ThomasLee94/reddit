@@ -30,7 +30,7 @@ server.use(expressValidator());
 server.engine('handlebars', handlebars({ defaultLayout: 'main' }));
 server.set('view engine', 'handlebars');
 
-// CUSTOM ROUTES
+// CUSTOM ROUTE MOUNTS
 server.use('/', indexRouter);
 server.use('/posts', postRouter);
 server.use('/r', subredditsRouter);
