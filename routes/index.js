@@ -8,7 +8,7 @@ const Post = require('../models/post');
 // SHOW POSTS
 router.get('/', checkUser, (req, res) => {
   const currentUser = req.user; 
-  console.log(currentUser);
+  console.log('CURRENT USER IN INDEX ROUTE', currentUser);
   Post.find().populate('author')
     .then((posts) => {
       res.render('post-index', { posts, currentUser }); 

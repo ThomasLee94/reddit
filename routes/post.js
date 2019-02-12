@@ -43,7 +43,7 @@ router.post('/new', checkAuth, (req,res) => {
 });
 
 // SEE INDIVIDUAL POST AND NESTED COMMENTS
-router.get('/:id', checkAuth, (req, res) => {
+router.get('/:id', (req, res) => {
   // LOOK UP POST
   const currentUser = req.user; 
   console.log(currentUser)

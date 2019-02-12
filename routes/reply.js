@@ -2,12 +2,13 @@ const Post = require('../models/post');
 const Comment = require('../models/comment');
 const User = require('../models/user');
 
+const checkAuth = require('../middleware/checkAuth');
+
 const express = require('express');
 const router = express.Router();
 
 // NEW REPLY
-router.get('/posts/:postId/comments/:commentId/replies/new', (req, res) => {
-  let post;
+router.get('/posts/:postId/comments/:commentId/replies/new', checkAuth, (req, res) => {
   Post.findById(req.params.postId)
     .then((p) => {
       post = p;

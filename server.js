@@ -12,6 +12,7 @@ const postRouter = require('./routes/post');
 const commentRouter = require('./routes/comment');
 const subredditsRouter = require('./routes/subreddit');
 const authRouter = require('./routes/auth');
+const replyRouter = require('./routes/reply')
 
 // SETTING DB AND MONGOOSE CONNECTION
 require('./data/reddit-db');
@@ -36,6 +37,7 @@ server.use('/posts', postRouter);
 server.use('/r', subredditsRouter);
 server.use('/posts', commentRouter);
 server.use('/users', authRouter);
+server.use('/', replyRouter);
 
 // PORT
 const port = process.env.PORT;
