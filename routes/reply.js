@@ -9,6 +9,7 @@ const router = express.Router();
 
 // NEW REPLY
 router.get('/posts/:postId/comments/:commentId/replies/new', checkAuth, (req, res) => {
+  console.log("HEDFASDFADSFADS")
   Post.findById(req.params.postId)
     .then((p) => {
       post = p;
@@ -23,7 +24,7 @@ router.get('/posts/:postId/comments/:commentId/replies/new', checkAuth, (req, re
 });
 
 // CREATE REPLY
-router.post('/posts/:postId/comments/:commentId/replies', (req, res) => {
+router.post('/posts/:postId/comments/:commentId/replies', checkAuth, (req, res) => {
   // TURN REPLY INTO A COMMENT OBJECT
   const reply = new Comment(req.body);
   reply.author = req.user._id

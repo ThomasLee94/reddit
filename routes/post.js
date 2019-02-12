@@ -9,7 +9,7 @@ const router = express.Router();
 const checkAuth = require('../middleware/checkAuth');
 
 // RENDER NEW-POST PAGE
-router.get('/new', (req, res) => {
+router.get('/new', checkAuth, (req, res) => {
   const currentUser = req.user; 
   res.render('new-post', { currentUser });
 }); 
@@ -17,7 +17,7 @@ router.get('/new', (req, res) => {
 // CREATE NEW POST
 // ONLY USERS WHO HAVE LOGGED IN MAY POST
 router.post('/new', checkAuth, (req,res) => {
-  const currentUser = req.user; 
+  const currentUser = req.user;
   // IF USER IS LOGGED IN AND FILLED ALL FIELDS
   if (req.body.title && req.body.url && req.body.summary && req.user) {
     // INSTANTIATE INSTANCE OF POST MODEL
@@ -28,7 +28,7 @@ router.post('/new', checkAuth, (req,res) => {
       .save()
       .then((post) => { return User.findById(req.user._id) })
       .then((user) => {
-        user.posts.unshift(post);
+        user.posts.unshift(post._id);
         user.save();
         // REDIRECT TO NEW POST
         res.redirect(`/posts/${post._id}`)
@@ -43,7 +43,7 @@ router.post('/new', checkAuth, (req,res) => {
 });
 
 // SEE INDIVIDUAL POST AND NESTED COMMENTS
-router.get('/:id', (req, res) => {
+router.get('/:id', checkAuth, (req, res) => {
   // LOOK UP POST
   const currentUser = req.user; 
   console.log(currentUser)

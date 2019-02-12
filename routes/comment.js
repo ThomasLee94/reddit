@@ -16,15 +16,11 @@ router.post('/:postid/comments', checkAuth, (req, res) => {
   comment 
     .save()
     .then((comment) => { 
-      return Promise.all([
-        Post.findById(req.params.postid)
-      ]);
+      return Post.findById(req.params.postid)
     })
     .then(([post, user]) => { 
       post.comments.unshift(comment); 
-      return Promise.all([
-        post.save() 
-      ]);
+      return post.save() 
     })
     .then((post) => { res.redirect(`/posts/${post._id}`) })
     .catch((err) => { console.log(err); });
