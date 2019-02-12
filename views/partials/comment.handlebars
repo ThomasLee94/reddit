@@ -2,7 +2,7 @@
     <p>{{comment.content}}</p>
     <p class="text-right">{{comment.author.username}}</p>
     <a href="/posts/{{postId}}/comments/{{comment._id}}/replies/new">Reply</a>
-    {{#each comment.comments}}
-        {{> comment post=../post comment=this}}
+    {{#each comments}}
+      {{> comment comment=this postId=../postId}}
     {{/each}}
 </div>

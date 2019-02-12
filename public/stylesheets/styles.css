@@ -8,3 +8,7 @@
   display: flex;
   flex-direction: flex-end;
 }
+
+.comment-indent {
+  margin-left: 20px;
+}

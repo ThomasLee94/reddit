@@ -46,10 +46,10 @@ router.post('/new', checkAuth, (req,res) => {
 router.get('/:id', checkAuth, (req, res) => {
   // LOOK UP POST
   const currentUser = req.user; 
-  console.log(currentUser)
+  console.log(currentUser);
   Post.findById(req.params.id).populate('comments').lean()
     .then((post) => {
-      console.log(post)
+      console.log(post.comments[0].comments);
       res.render('posts-show', { post, currentUser });
     })
     .catch((err) => { console.log(err.message); });
